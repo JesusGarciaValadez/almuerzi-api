@@ -236,3 +236,9 @@ Temporary Items
 ### Diff template
 *.patch
 *.diff
+
+.vercel/
+
+.env
+
+.vercel
