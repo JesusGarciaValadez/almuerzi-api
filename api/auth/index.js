@@ -17,18 +17,18 @@ const isAuthenticated = (req, res, next) => {
 
     Users.findOne({ _id }).exec()
       .then(user => {
-        req.user = { _id: user._id, email: user.email }
+        req.user = { _id: user._id, email: user.email, role: user.role }
         next()
       })
   })
 }
 
 const hasRoles = roles => (req, res, next) => {
-  if (roles.indexOf(req.user.role) > -1) {
-    return next
+  if (roles.indexOf(req.user.role) === -1) {
+    return res.sendStatus(403)
   }
 
-  res.sendStatus(403)
+  return next()
 }
 
 module.exports = { isAuthenticated, hasRoles }
