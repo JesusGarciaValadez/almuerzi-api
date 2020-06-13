@@ -15,7 +15,7 @@ router.get('/me', isAuthenticated, (req, res) => {
 })
 
 router.post('/register', (req, res) => {
-  const {email, password} = req.body
+  const {email, password, role} = req.body
 
   crypto.randomBytes (16, (err, rawSalt) => {
     if (err) {
@@ -39,6 +39,7 @@ router.post('/register', (req, res) => {
           Users.create ({
             email,
             password: encryptedPassword,
+            role,
             salt
           })
             .then (() => res.send ('User created successfully.'))
@@ -54,7 +55,7 @@ router.post('/login', (req, res) => {
   Users.findOne({ email }).exec()
     .then(user => {
       if (!user) {
-        return res.send ('Error generating encrypted key.')
+        return res.send ('User or password are incorrect.')
       }
 
       crypto.pbkdf2 (password, user.salt, 10000, 64, 'sha1', (err, key) => {
