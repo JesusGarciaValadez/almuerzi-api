@@ -3,16 +3,16 @@
   "version": "1.0.0",
   "main": "api/index.js",
   "description": "Demo de sitio de Almuerzi",
-  "keywords": "demo, almuerzi",
+  "keywords": "demo, almuerzi, api",
   "license": "MIT",
   "author": "JesusGarciaValadez",
   "scripts": {
-    "start": "node api/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "netlify-lambda build api",
+    "start": "nodemon server-local.js"
   },
   "devDependencies": {
-    "now": "^19.0.1",
-    "vercel": "^19.0.1"
+    "netlify-lambda": "^1.6.3",
+    "nodemon": "^2.0.4"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -20,6 +20,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.9.18"
+    "mongoose": "^5.9.18",
+    "serverless-http": "^2.5.0"
   }
 }
